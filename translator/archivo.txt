@@ -1,0 +1,3 @@
+Lo que aparece como texto en la pantalla realmente se almacena como valores numéricos en el archivo de texto. El equipo traduce los valores numéricos en caracteres visible.
+Un estándar de codificación es un esquema numérico que asigna a cada carácter de texto de un conjunto de caracteres un valor numérico. Un conjunto de caracteres puede incluir caracteres alfabéticos, numéricos y otros símbolos. Los distintos idiomas están formados, normalmente, por diferentes conjuntos de caracteres; por lo tanto, existen muchos estándares de codificación distintos para representar los conjuntos de caracteres que se usan en los diferentes idiomas.
+Estándares de codificación distintos para alfabetos diferentes
