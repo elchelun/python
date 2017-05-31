@@ -6,16 +6,7 @@ import os
 import random
 import time
 
-os.system('clear')
-
-print "Welcome to Chelo's HangMan\n\n"
-print "Please select what you want to play with: "
-print "1) Movies"
-print "2) Countries"
-print "3) Mexican Food"
-#option = raw_input("\nSelect 1-2-3: ")
-
-os.system('clear')
+#os.system('clear')
 
 def init_hang_print():
     print "\t   ________"
@@ -100,49 +91,81 @@ def print_word(p, w):
         print w[i],
     print "\n\n"
 
-options= ["movies", "countries", "mex_food"]
-movies = ['deadpool', 'spiderman', 'superman', 'batman']
+def file2list(files, lines):
+    with open(files) as file:
+        for line in file:
+            line = line.strip() #or someother preprocessing
+            lines.append(line)
+    return lines
+
+options= ["", "movies", "countries", "mexican food"]
+movies = []
+countries = []
+mex_food = []
 letters = []
+bad_letter = []
 word = []
 count = 0
 
-def search(p,w,l):
-    for i in range(len(p)):
-        if l == p[i]:
-            w[i] = l
-    return p,w,l
+#Script start here
+os.system('clear')
+print "Welcome to Chelo's HangMan\n\n"
+print "Please select what you want to play with: "
+print "1) Movies"
+print "2) Countries"
+print "3) Mexican Food"
+option = raw_input("\nSelect 1-2-3: ")
 
-#Next line is for texting only
-option = '1'
+os.system('clear')
 
 if option == "1":
+    file2list('./movies', movies)
     init_hang_print()
     picked = random.choice(movies)
     print_word(picked, word)
-    if picked:
-        while count < 7:
-            found = False
-            letter = raw_input("Enter a leter or 1 to guess the " + options[0] + ": ")
-            if letter != "1":
-                for i in range(len(picked)):
-                    if letter == picked[i]:
-                        word[i] = letter
-                        found = True
-                if found:
-                    hang_print(count)
-                    print_word(picked, word)
-                else:
-                    count += 1
-                    hang_print(count)
-                    print_word(picked, word)
+elif option == "2":
+    file2list('./countries', countries)
+    init_hang_print()
+    picked = random.choice(countries)
+    print_word(picked, word)
+elif option == "3":
+    file2list('./mex_food', mex_food)
+    init_hang_print()
+    picked = random.choice(mex_food)
+    print_word(picked, word)
+
+if picked:
+    while count < 6:
+        found = False
+        letter = raw_input("Enter a leter or 1 to guess the " + options[int(option)] + ": ")
+        if letter != "1":
+            for i in range(len(picked)):
+                if letter == picked[i]:
+                    word[i] = letter
+                    found = True
+            if found:
+                hang_print(count)
+                print_word(picked, word)
+                print bad_letter, "\n\n"
             else:
-                guess = raw_input("Enter your best guess: ")
-                time.sleep(0.5)
-                if guess == picked:
-                    print "\nGood guess, you WIN\n"
-                    quit()
-                else:
-                    print "\nSorry you LOST"
-                    print "\nThe " + options[0] + "was " + picked
-                    print "\nBetter luck next time :)\n"
-                    quit()
+                count += 1
+                hang_print(count)
+                print_word(picked, word)
+                bad_letter.append(letter)
+                print bad_letter, "\n\n"
+        else:
+            guess = raw_input("Enter your best guess: ")
+            time.sleep(0.5)
+            if guess == picked:
+                print "\nGood guess, you WIN\n"
+                quit()
+            else:
+                print "\nSorry you LOST"
+                print "\nThe " + options[int(option)] + " was " + picked
+                print "\nBetter luck next time :)\n"
+                quit()
+print "\nSorry you LOST"
+print "\nThe " + options[int(option)] + " was " + picked
+print "\nBetter luck next time :)\n"
+quit()
+
