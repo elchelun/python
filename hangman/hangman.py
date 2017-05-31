@@ -87,7 +87,10 @@ def hang_print(x):
 
 def print_word(p, w):
     for i in range(len(p)):
-        w.append("_ ")
+        if p[i] != " ":
+            w.append("_ ")
+        else:
+            w.append(" | ")
         print w[i],
     print "\n\n"
 
