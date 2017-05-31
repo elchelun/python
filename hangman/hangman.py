@@ -85,14 +85,24 @@ def hang_print(x):
         print "\n\n"
         print "GAME OVER"
 
-def print_word(p, w):
+def init_print_word(p, w):
     for i in range(len(p)):
         if p[i] != " ":
             w.append("_ ")
         else:
-            w.append(" | ")
+            w.append(" ")
         print w[i],
     print "\n\n"
+
+def print_word(p, w):
+    for i in range(len(p)):
+#        if p[i] != " ":
+#            w.append("_ ")
+#        else:
+#            w.append(" | ")
+        print w[i],
+    print "\n\n"
+
 
 def file2list(files, lines):
     with open(files) as file:
@@ -101,7 +111,7 @@ def file2list(files, lines):
             lines.append(line)
     return lines
 
-options= ["", "movies", "countries", "mexican food"]
+options= ["", "movies", "country", "mexican food"]
 movies = []
 countries = []
 mex_food = []
@@ -125,17 +135,17 @@ if option == "1":
     file2list('./movies', movies)
     init_hang_print()
     picked = random.choice(movies)
-    print_word(picked, word)
+    init_print_word(picked, word)
 elif option == "2":
     file2list('./countries', countries)
     init_hang_print()
     picked = random.choice(countries)
-    print_word(picked, word)
+    init_print_word(picked, word)
 elif option == "3":
     file2list('./mex_food', mex_food)
     init_hang_print()
     picked = random.choice(mex_food)
-    print_word(picked, word)
+    init_print_word(picked, word)
 
 if picked:
     while count < 6:
@@ -156,11 +166,15 @@ if picked:
                 print_word(picked, word)
                 bad_letter.append(letter)
                 print bad_letter, "\n\n"
+            winner = "".join(word)
+            if winner == picked:
+                print "\nGood job, you WIN!!!\n\n"
+                quit()
         else:
             guess = raw_input("Enter your best guess: ")
             time.sleep(0.5)
             if guess == picked:
-                print "\nGood guess, you WIN\n"
+                print "\nGood guess, you WIN!!!\n\n"
                 quit()
             else:
                 print "\nSorry you LOST"
