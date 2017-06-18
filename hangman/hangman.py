@@ -96,10 +96,6 @@ def init_print_word(p, w):
 
 def print_word(p, w):
     for i in range(len(p)):
-#        if p[i] != " ":
-#            w.append("_ ")
-#        else:
-#            w.append(" | ")
         print w[i],
     print "\n\n"
 
@@ -132,19 +128,19 @@ option = raw_input("\nSelect 1-2-3: ")
 os.system('clear')
 
 if option == "1":
-    file2list('./movies', movies)
+    file2list('/root/python/hangman/movies', movies)
     init_hang_print()
-    picked = random.choice(movies)
+    picked = random.choice(movies).lower()
     init_print_word(picked, word)
 elif option == "2":
-    file2list('./countries', countries)
+    file2list('/root/python/hangman/countries', countries)
     init_hang_print()
-    picked = random.choice(countries)
+    picked = random.choice(countries).lower()
     init_print_word(picked, word)
 elif option == "3":
-    file2list('./mex_food', mex_food)
+    file2list('/root/python/hangman/mex_food', mex_food)
     init_hang_print()
-    picked = random.choice(mex_food)
+    picked = random.choice(mex_food).lower()
     init_print_word(picked, word)
 
 if picked:
